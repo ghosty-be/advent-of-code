@@ -31,34 +31,38 @@ def filterbinlist(binlist, flip=False, index=0, filterstring=""):
     # end recursion 
     # base condition: amount of binary numbers in the list == 1
     if len(binlist)==1:
-        print(binlisttoint(binlist))
+        #print(binlisttoint(binlist))
         return binlisttoint(binlist)
-
-    # proces each number in the list
-    for number in binlist:
-        if int(number[index])==0:
-            zerocounter+=1
+    
+    if len(binlist)>1:
+        # proces each number in the list
+        for number in binlist:
+            if int(number[index])==0:
+                zerocounter+=1
+            else:
+                onecounter+=1
+        if not flip:
+            if zerocounter>onecounter:
+                filterstring=filterstring + '0'
+            else:
+                filterstring=filterstring + '1'
         else:
-            onecounter+=1
-    if not flip:
-        if zerocounter>onecounter:
-            filterstring=filterstring + '0'
-        else:
-            filterstring=filterstring + '1'
-    else:
-        if onecounter<zerocounter:
-            filterstring=filterstring + '1'
-        else:
-            filterstring=filterstring + '0'
-    # filter it out
-    r = re.compile("^"+filterstring)
-    filtered_list = list(filter(r.match, binlist))
-    index+=1
-    # recursion
-    filterbinlist(filtered_list,flip,index,filterstring)
+            if onecounter<zerocounter:
+                filterstring=filterstring + '1'
+            else:
+                filterstring=filterstring + '0'
+        # filter it out
+        r = re.compile("^"+filterstring)
+        filtered_list = list(filter(r.match, binlist))
+        index+=1
+        # recursion
+        return filterbinlist(filtered_list,flip,index,filterstring)
 
 ## MAIN
 oxygen=filterbinlist(content)
 print(oxygen)
 co2=filterbinlist(content,True)
 print(co2)
+
+prod=oxygen * co2
+print(prod)
