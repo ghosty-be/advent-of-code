@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 import sys
+
 if len(sys.argv) < 2:
     print("usage: " + sys.argv[0] + " <filename>")
     exit(1)
@@ -10,6 +11,14 @@ filename = sys.argv[1]
 file = open(filename)
 content = file.read().splitlines()
 file.close()
+
+
+# 1a
+# input is calories carried per elf (delimited with a blank line)
+# Find the Elf carrying the most Calories. How many total Calories is that Elf carrying?
+
+# 1b
+# Find the top three Elves carrying the most Calories. How many Calories are those Elves carrying in total?
 
 elfnumber = 1
 caloriecounter = 0
